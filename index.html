@@ -97,5 +97,33 @@
       initESW('https://service.force.com');
   }
 </script>
+	   <script type='text/javascript'>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Funzione per sostituire <h2> con <p>
+    function replaceHeadings() {
+        const headerContainer = document.querySelector("#esw-channelmenu_header");
+        if (headerContainer) {
+            const headings = headerContainer.querySelectorAll("h2");
+            headings.forEach((heading) => {
+                const paragraph = document.createElement("p");
+                paragraph.className = heading.className;
+                paragraph.innerHTML = heading.innerHTML;
+                heading.parentNode.replaceChild(paragraph, heading);
+            });
+            console.log("H2 tags replaced successfully!");
+            return true; // Interrompe il controllo quando completato
+        }
+        return false;
+    }
+
+    // Controlla ogni 500ms se l'elemento è stato caricato
+    const interval = setInterval(() => {
+        if (replaceHeadings()) {
+            clearInterval(interval); // Interrompe l'intervallo se l'elemento è stato trovato e sostituito
+        }
+    }, 500);
+});
+
+</script>
       </body>
  </html>
